@@ -1,0 +1,15 @@
+img{
+    height: 250px;
+    width:100%;   
+}
+.Book1{
+    width:250px;
+    height: 300 px;
+    border:2px solid black;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+
+
