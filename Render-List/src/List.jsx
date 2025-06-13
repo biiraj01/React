@@ -1,12 +1,6 @@
-function List(){
+import PropTypes from 'prop-types';
 
-    const foods = [
-        {id:1,name:"pizza",calories:200},
-        {id:2,name: "burger",calories:300},
-        {id:3,name: "momo",calories:400},
-        {id:4,name: "sandwitch",calories:500},
-        {id:5,name: "nooddles",calories:600}];
-
+function List(props){
         //foods.sort((a,b)=>a.name.localeCompare(b.name));
         //foods.sort((a,b)=>b.name.localeCompare(a.name));
         //foods.sort((a,b)=>a.calories.-b.calories);
@@ -15,17 +9,32 @@ function List(){
 
     //const lowCalorieFoods = foods.filter(food => food.calories < 350);
     //const highCalorieFoods = foods.filter(food => food.calories > 350);
+    const category = props.category;
+    const itemList = props.items;
+    const listedItems = itemList.map(item => 
+        <li key={item.id}>{item.name}:&nbsp;
+                        <b>{item.calories}</b></li>
+);
     
-    
-    const listedItems = foods.map(foods => 
-        <li key={foods.id}>{foods.name}:&nbsp;
-                        <b>{foods.calories}</b></li>
-    );
-
     return(
-        <ul>{listedItems}</ul>
+          <>
+            <h2 className="list-category">{category}</h2>
+            <ul className="list-items">{listedItems}</ul>
+          </>
     );
 }   
 
+List.defaultProps = {
+    category: "Category",
+    items : [],
+}
+
+List.PropTypes = {
+    category : PropTypes.string,
+    items : PropTypes.arrayOf(PropTypes.shape({id:PropTypes.number},
+                                            {name:PropTypes.string},
+                                            {calories:PropTypes.number}
+    )),
+}
 
 export default List
